@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  # FastAPI Backend Application
+  rci-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rci-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+      - EMBEDDING_MODEL=BAAI/bge-small-en-v1.5
+      - LLM_MODEL=llama3.2
+      - OLLAMA_BASE_URL=http://localhost:11434
+    volumes:
+      - ./backend:/app/backend
+    depends_on:
+      - qdrant
+
+  # Qdrant Vector Database
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: rci-qdrant
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+    environment:
+      - QDRANT__SERVICE_NAME=qdrant
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+volumes:
+  qdrant_data:

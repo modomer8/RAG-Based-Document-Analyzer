@@ -1,0 +1,44 @@
+/*
+ * RCI - RAG Compliance Intelligence
+ * Global CSS with Tailwind directives and component styles
+ */
+
+/* CSS Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Body */
+body {
+  background: #F1FBFA;
+  overflow: hidden;
+}
+
+/* VShader and FShader placeholders for R3F */
+#three-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Fallback for text in 3D */
+.meshText2d {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
